@@ -15,18 +15,32 @@ int contador(char *s1)
 
 char *ft_strstr(char *str, char *to_find)
 {
-    int i, j,y;
+    int i, j,to_find_len;
+    
     i = 0;
-    j = contador(to_find);
-    y = 0;
-    while(str[i] != '\0')
+    to_find_len = contador(to_find);
+
+
+
+    if (to_find_len == 0) {
+        return (char *)str; 
+    }
+
+    while (str[i] != '\0') 
     {
-        if(str[i] == to_find[y])
-            y++;
-        else if( j == y)
-            return to_find;
-        else
-            y = 0;
+        j = 0;
+        while (j < to_find_len && str[i + j] != '\0') 
+        {
+            if (str[i + j] != to_find[j]) 
+            {
+               break; 
+            }
+            j++;
+        }
+
+        if (j == to_find_len) {
+            return (char *)&str[i];
+        }
         i++;
     }
     return NULL; 
